@@ -1,0 +1,17 @@
+.gitignore
+node_modules/
+*.vsix
+.DS_Store
+out/
+**/*.test.ts
+**/*.test.js
+src/**
+tsconfig.json
+.eslintrc.json
+GETTING_STARTED.md
+SETUP_COMPLETE.md
+test-sample.js
+.git/
+.github/
+*.map
+.vscode-test/

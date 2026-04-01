@@ -1,0 +1,94 @@
+{
+  "name": "pii-blocker",
+  "displayName": "Privacy Guard AI",
+  "description": "Detects and redacts sensitive data in files and prevents leaks to Copilot Chat. Protects privacy from AI systems with real-time monitoring.",
+  "version": "1.1.0",
+  "publisher": "parth-dev",
+  "author": "Parth",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/parthbhad6969-sketch/pii-blocker"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onChatParticipant:secure-scan"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "piiBlocker.redactCurrentFile",
+        "title": "Privacy Guard AI: Redact Current File"
+      },
+      {
+        "command": "piiBlocker.showStats",
+        "title": "Privacy Guard AI: Show Detection Statistics"
+      },
+      {
+        "command": "piiBlocker.checkSelection",
+        "title": "Privacy Guard AI: Check Selection Safety"
+      },
+      {
+        "command": "piiBlocker.showMonitoringStatus",
+        "title": "Privacy Guard AI: Show Chat Monitoring Status"
+      },
+      {
+        "command": "piiBlocker.openSettings",
+        "title": "Privacy Guard AI: Open Settings"
+      }
+    ],
+    "chatParticipants": [
+      {
+        "id": "secure-scan",
+        "name": "secure-scan",
+        "description": "Scans the current file for PII leaks (Email, Credit Card, Aadhar numbers)",
+        "isSticky": true
+      }
+    ],
+    "configuration": [
+      {
+        "title": "Privacy Guard AI",
+        "properties": {
+          "piiBlocker.enableRedaction": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable real-time redaction of PII in the editor"
+          },
+          "piiBlocker.redactionStyle": {
+            "type": "string",
+            "default": "black-background",
+            "enum": [
+              "black-background",
+              "blur",
+              "rectangle"
+            ],
+            "description": "Style for redacting sensitive content"
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.50.0",
+    "typescript": "^5.2.2"
+  }
+}
